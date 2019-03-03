@@ -4,6 +4,7 @@ let stateCheck = setInterval(() => {
     pageInit();
     // createTestingVersion();
     document.querySelector('#frmRegistration').addEventListener('submit', printForm);
+    document.querySelector('#childName').addEventListener('change', fillFormInit);
     clearInterval(stateCheck);
   }
 }, 100);
@@ -33,11 +34,30 @@ else
 
 
 function pageInit() {
-  hideElement("frmRegSignature"); 
+  
+  let fieldSets = document.getElementsByTagName("fieldset");
+  console.log(fieldSets.length);
+
+  for (var i = 0; i < fieldSets.length; i++) {
+    unHideElement(fieldSets[i]);
+
+  // fieldSets.array.forEach(function (element){
+  //     element.style.display = 'none';  
+  //   });
+  hideElement("frmRegSignature");
+  hideElement("startError");
+  }
+  
 }
 
+function fillFormInit() {
+  if (document.querySelector('#childName').value == 'fill form') {
+    console.log('fill form'); 
+    fillForm();
+  }
+}
 
-function createTestingVersion() {
+function fillForm() {
 
   var el = document.getElementsByTagName('h1')[0],
     elChild = document.createElement('h4');

@@ -4,7 +4,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Přihláška Jindřichovice 2019</title>
   <link rel="stylesheet" href="./prihlaskaJindrichovice2019_files/prihlaskaJindrichovice2019.css">
@@ -13,18 +12,28 @@
 
 <body>
   <section>
-    <h1>PŘIHLÁŠKA NA LETNÍ TÁBOR PRO DĚTI SE ZRAKOVÝM POSTIŽENÍM 12.-26.7 2019 v Jindřichovicích Pod Smrkem
-    </h1>
-    <h4>Pořádá: Tyfloturistický oddíl, z.s., Bořivojova 774/65, 130 00, Praha Žižkov<br>
-
-    </h4>
     <form id="frmRegistration" onsubmit="return false">
+      <div class="showDefault">
+        <h1>
+          PŘIHLÁŠKA NA LETNÍ TÁBOR PRO DĚTI SE ZRAKOVÝM POSTIŽENÍM 12.-26.7 2019 v Jindřichovicích Pod Smrkem
+        </h1>
+        <h4>Pořádá: Tyfloturistický oddíl, z.s., Bořivojova 774/65, 130 00, Praha Žižkov<br>
+        </h4>
+      </div>
+      <fieldset id="startError" class="showDefault">
+        <p>
+          <strong> Chyba zobrazení</strong><br>
+          Prosím ujistěte, se že je ve vašem prohlížeči povolený javascript. <br>
+          Doporučujeme používat aktuální verzi prohlížeče Chrome, Firefox nebo Edge.
+        </p>
+
+      </fieldset>
       <fieldset>
         <legend> <span class="fs090em">1)</span> Pokyny k vyplnění přihlášky</legend>
         <p>Kontaktní osoba: hlavní vedoucí Hana Šimková <a
             href="mailto:hane.simkove@gmail.com">hane.simkove@gmail.com</a> tel: 720 191 407.</p>
         <p>V zájmu vašeho dítěte a všech dalších dětí a vedoucích tábora prosíme o svědomité vyplnění přihlášky.</p>
-        <p>Vyplněnou přihlášku prosím vytiskněte, podepište a naskenovanou nebo nafocenou pošlete na emailovou adresu
+        <p>Vyplněnou přihlášku prosím vytiskněte, podepište a naskenovanou nebo nafocenou pošlete na e-mailovou adresu
           hlavní vedoucí tábora.
         </p>
         <p>Přihlášku nebude možné uložit. Ujistěte se, že je z vašeho prohlížeče možné tisknout alespoň do formátu pdf.
@@ -124,11 +133,13 @@
           <label for="eyeSightRadios"><span class="fs090em">4.1)</span> Jak je na tom vaše dítě se zrakem?
           </label>
           <div id="howAboutEyeSightRadios" class="verticalElements">
-          <label><input type="radio" name="howAboutEyeSight" value="1" required>nosí brýle a vidí s nimi prakticky jako zdravý
+            <label><input type="radio" name="howAboutEyeSight" value="1" required>nosí brýle a vidí s nimi prakticky
+              jako zdravý
               člověk</label>
             <label><input type="radio" name="howAboutEyeSight" value="2">silně slabozraké, přečte hodně zvětšený
               černotisk</label>
-            <label><input type="radio" name="howAboutEyeSight" value="3">je zcela nevidomé, nebo má zachovaný světlocit</label>
+            <label><input type="radio" name="howAboutEyeSight" value="3">je zcela nevidomé, nebo má zachovaný
+              světlocit</label>
           </div>
         </div>
         <div class="w100PerCent">
@@ -161,17 +172,20 @@
           </div>
         </div>
         <div class="w100PerCent">
-          <label for="movementRestrictionsEyeSight"><span class="fs090em">4.6)</span> Má nějaká pohybová nebo režimová omezení v
+          <label for="movementRestrictionsEyeSight"><span class="fs090em">4.6)</span> Má nějaká pohybová nebo režimová
+            omezení v
             souvislosti se zrakovou vadou? (pokud ano, uveďte také podrobnsti. Např.: Nesmí skákat kvůli glaukomu,riziku
             odchlípení sítnice apod.)</label>
-          <textarea name="movementRestrictionsEyeSight" id="movementRestrictionsEyeSight" minlength="2" required></textarea>
+          <textarea name="movementRestrictionsEyeSight" id="movementRestrictionsEyeSight" minlength="2"
+            required></textarea>
         </div>
       </fieldset>
 
       <fieldset id="frmRegHealth">
         <legend><span class="fs090em">5)</span> Zdravotnická část</legend>
         <div class="w100PerCent">
-          <label for="allDrugs"><span class="fs090em">5.1)</span> Užívá vaše dítě nějaké léky? (Pokud ano, uveďte podrobnosti - název, dávkování - např. "Euthyrox, 1
+          <label for="allDrugs"><span class="fs090em">5.1)</span> Užívá vaše dítě nějaké léky? (Pokud ano, uveďte
+            podrobnosti - název, dávkování - např. "Euthyrox, 1
             tableta 100mg, ráno po jídle")
           </label>
           <textarea name="allDrugs" id="allDrugs" minlength="2" required></textarea>
@@ -244,7 +258,7 @@
         </div>
       </fieldset>
 
-      <fieldset id="frmRegAdditionalInfo"class="avoidPageBreakInside">
+      <fieldset id="frmRegAdditionalInfo" class="avoidPageBreakInside">
         <legend><span class="fs090em">6)</span> Doplňující informace o dítěti</legend>
         <div class="w50PerCent">
           <label for="bedWettingRadios"><span class="fs090em">6.1)</span> Pomočuje se dítě v noci?</label>
@@ -293,7 +307,8 @@
           <label for="gdprCanPublishRadios"><span class="fs090em">7.1)</span> Souhlas s pořizováním
             fotografií/videí</label>
           <div id="gdprCanPublishRadios" class="verticalElements">
-            <label><input type="radio" name="gdprCanPublish" value="yes" required>Souhlasím s tím, aby fotografie nebo videa, na
+            <label><input type="radio" name="gdprCanPublish" value="yes" required>Souhlasím s tím, aby fotografie nebo
+              videa, na
               kterých je zachycen(a) můj syn/ má dcera/ můj svěřenec na akcích pořádaných Tyfloturistickým oddílem,
               z.s., byly uveřejňovány na webových či facebookových stránkách tohoto spolku a byly případně použity pro
               účely propagace činnosti spolku.</label>
@@ -306,7 +321,8 @@
         <div>
           <label for="gdprCanTagRadios"><span class="fs090em">7.2)</span> Souhlas s označením fotek/videí</label>
           <div id="gdprCanTagRadios" class="verticalElements">
-            <label><input type="radio" name="gdprCanTag" value="yes" required>Souhlasím s tím, aby v popiscích fotografií nebo
+            <label><input type="radio" name="gdprCanTag" value="yes" required>Souhlasím s tím, aby v popiscích
+              fotografií nebo
               videí bylo uvedeno i jméno mého syna/svěřence/mé dcery.</label>
             <label><input type="radio" name="gdprCanTag" value="no">Nesouhlasím s tím, aby v popiscích fotografií nebo
               videí bylo uvedeno i jméno mého syna/svěřence/mé dcery.</label>

@@ -24,6 +24,15 @@ section {
 section > h1{
   color: var(--title-color); 
 }
+
+.showDefault {
+  display: block
+}
+
+form fieldset {
+  display:none
+}
+
 form fieldset {
   background: var(--form-background);
   border: 0.5mm solid var(--dark-grey);
@@ -105,6 +114,6 @@ span.fs090em {
   font-size: 0.9em
 }
 
-fieldset >div, .avoidPageBreakInside {
+fieldset > div, .avoidPageBreakInside {
     page-break-inside: avoid;
 }
