@@ -59,13 +59,13 @@ function fillFormInit() {
 
 function fillForm() {
 
-  var el = document.getElementsByTagName('h1')[0],
-    elChild = document.createElement('h4');
-  elChild.innerHTML = 'TESTOVACÍ VERZE !!!';
-  // Prepend it
-  el.insertBefore(elChild, el.firstChild);
+  // var el = document.getElementsByTagName('h1')[0],
+  //   elChild = document.createElement('h4');
+  // elChild.innerHTML = 'TESTOVACÍ VERZE !!!';
+  // // Prepend it
+  // el.insertBefore(elChild, el.firstChild);
 
-  document.getElementById("childName").value = "Anička Nováková";
+  document.getElementById("childName").value = "Testovací";
   document.getElementById("childPIN").value = "080512/1234";
   document.getElementById("childInsuranceCompany").value = "Hasičská zdravotní pojišťovna";
   document.getElementById("childAddress").value = "Dolní 5, 123 45 Havířov";
