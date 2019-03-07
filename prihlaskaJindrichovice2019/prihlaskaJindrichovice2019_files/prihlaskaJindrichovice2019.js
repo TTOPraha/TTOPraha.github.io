@@ -12,10 +12,10 @@ let stateCheck = setInterval(() => {
 // Remove an element
 function removeElement(id)
 {
-    if(typeof id === "object")
-        return id.parentNode.removeChild(id);
-    else
-        return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+  if(typeof id === "object")
+      return id.parentNode.removeChild(id);
+  else
+      return (elem=document.getElementById(id)).parentNode.removeChild(elem);
 }
 // Hide an element
 function hideElement(id) { 
