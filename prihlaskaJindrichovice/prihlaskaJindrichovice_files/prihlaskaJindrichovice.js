@@ -19,18 +19,26 @@ page.init = async function () {
 
 page.printTestVersion = () => {
   page.createTestingVersion();
+  page.resizeTextAreas();
   document.querySelector('#frmRegSignature').style.display = 'block';
   document.querySelector('#submitForm').style.display = 'none';
+  document.querySelector('#clearForSibling').style.display = 'none';
   window.print();
   document.location.reload();
+  document.querySelector('#submitForm').style.display = 'inline';
+  document.querySelector('#clearForSibling').style.display = 'inline';
 };
 
 page.printForm = () => {
+  page.resizeTextAreas();
   document.querySelector('#frmRegSignature').style.display = 'block';
   document.querySelector('#submitForm').style.display = 'none';
+  document.querySelector('#clearForSibling').style.display = 'none';
   window.print();
   document.querySelector('#frmRegSignature').style.display = 'none';
-  document.querySelector('#submitForm').style.display = 'block';
+  document.querySelector('#submitForm').style.display = 'inline';
+  document.querySelector('#clearForSibling').style.display = 'inline';
+
 };
 
 page.resizeTextAreas = () => {
@@ -65,7 +73,6 @@ page.sendApplication = function () {
     if (xhr.readyState == 4 && xhr.status == 200) page.forward();
   };
   xhr.send(formData);
-  page.resizeTextAreas();
   page.printForm();
   // if (page.testVersion) page.forward();
 };
