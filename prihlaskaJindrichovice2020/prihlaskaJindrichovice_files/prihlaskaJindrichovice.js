@@ -13,8 +13,6 @@ page.init = async function () {
   document.querySelector('#frmRegistration').addEventListener('submit', page.sendApplication);
   document.querySelector('#testPrint').addEventListener('click', page.printTestVersion);
   document.querySelector('#clearForSibling').addEventListener('click', page.clearForSiblingEntry);
-  
-  document.querySelector('#turnOnJSWarning').style.display = 'none';
 };
 
 page.printTestVersion = () => {
