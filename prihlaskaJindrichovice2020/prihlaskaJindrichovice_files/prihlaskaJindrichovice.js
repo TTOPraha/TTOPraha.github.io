@@ -2,13 +2,15 @@ let page = {};
 
 // na ostré verzi změnit na false
 page.testVersion = true;
+page.dateOfCampStart = new Date(2020, 6, 12);
+page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
 
 window.onload = () => {
   page.init();
   if (page.testVersion) page.createTestingVersion();
 };
 
-page.init = async function () {
+page.init = async () => {
   document.querySelector('main').style.display = 'block';
   document.querySelector('#frmRegistration').addEventListener('submit', page.sendApplication);
   document.querySelector('#testPrint').addEventListener('click', page.printTestVersion);
@@ -51,31 +53,41 @@ page.resizeTextAreas = () => {
   }
 };
 
-page.sendApplication = function () {
-  console.log('submit');
+page.fillDateOfBirth = () => {
+
+};
+
+page.sendApplication = () => {
   let formElement = document.querySelector("#frmRegistration");
-  let formData = page.rormToJSON(formElement);
-  // console.log(formData);
+  let formData = page.formToJSON(formElement);
+  console.log(formData);
+
+  let dateOfBirth = page.getDateOfBirthFromRC(formData.diteRC);
+  if (!dateOfBirth) {
+    alert('Rodné číslo není ve správném formátu');
+    return;
+  } 
+  let age = page.getAge(page.dateOfCampStart, dateOfBirth);
+    
+  document.querySelector('#diteDatumNarozeni').value = page.convertDate(dateOfBirth);
+  document.querySelector('#diteVek').value = age;
 
   let xhr = new XMLHttpRequest();
-  let url = "url";
-
-  //test
-  if ( url==="url" && page.testVersion) url = "http://localhost:3000/application";
-
-  //// Věk v době tábora ////
+  let url = "../zpracuj.php";
+  if (page.testVersion) url = "../zpracuj.php";
 
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) page.forward();
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) page.printForm();
+    if (!(xhr.readyState == 4 && xhr.status == 200) && page.testVersion) page.printForm();
+
   };
   xhr.send(formData);
-  page.printForm();
-  // if (page.testVersion) page.forward();
+
 };
 
-page.forward = async function () {
+page.forward = async () => {
   window.scrollTo(0, 0);
   // případně přesměrovat na info/homepage? 
   // window.location.replace("podzimky2019.html");
@@ -84,13 +96,13 @@ page.forward = async function () {
   }, 50);
 };
 
-page.createTestingVersion = function () {
+page.createTestingVersion = () => {
   page.testVersion = true;
-  const loremIpsum = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.";
+  const loremIpsum = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.";
 
   // 2
   document.getElementsByName("diteJmeno")[0].value = "TEST Anička Nováková TEST";
-  document.getElementsByName("diteRC")[0].value = "080512/1234";
+  document.getElementsByName("diteRC")[0].value = "055729/1234";
   document.getElementsByName("diteZTPP")[0].value = "123456";
   document.getElementsByName("ditePojistovna")[0].value = "Hasičská zdravotní pojišťovna";
   document.getElementsByName("diteadresa")[0].value = "Dolní 5, 123 45 Havířov";
@@ -113,10 +125,10 @@ page.createTestingVersion = function () {
   // 4
   document.getElementsByName("jakDiteVidi")[0].checked = true;
   document.getElementsByName("umiBraille")[0].checked = true;
-  document.getElementsByName("umiSBilouHoli")[0].checked = true;
+  document.getElementsByName("chodiSBilouHoli")[0].checked = true;
   document.getElementsByName("budeMitBilouHul")[0].checked = true;
   document.getElementsByName("zrakDetaily")[0].value = loremIpsum;
-  document.getElementsByName("omezeniSkrZrakVadu")[0].value = loremIpsum;
+  document.getElementsByName("omezeniSkrZrakVadu")[0].value = 'Nemá';
 
   // 5
   document.getElementsByName("uzivaneLeky")[0].value = loremIpsum;
@@ -151,7 +163,7 @@ page.createTestingVersion = function () {
   document.getElementsByName("diteJeZpusobile")[0].checked = true;
 };
 
-page.clearForSiblingEntry = function () {
+page.clearForSiblingEntry = () => {
   // document.getElementById("myForm").reset()
 
   // 2
@@ -162,7 +174,7 @@ page.clearForSiblingEntry = function () {
   // 4
   document.getElementsByName("jakDiteVidi")[0].checked = false;
   document.getElementsByName("umiBraille")[0].checked = false;
-  document.getElementsByName("umiSBilouHoli")[0].checked = false;
+  document.getElementsByName("chodiSBilouHoli")[0].checked = false;
   document.getElementsByName("budeMitBilouHul")[0].checked = false;
   document.getElementsByName("zrakDetaily")[0].value = "";
   document.getElementsByName("omezeniSkrZrakVadu")[0].value = "";
@@ -190,7 +202,7 @@ page.clearForSiblingEntry = function () {
 };
 
 
-page.rormToJSON = function (form) {
+page.formToJSON = function (form) {
   let jsonOutput = {};
   // Loop through each field in the form
   for (let i = 0; i < form.elements.length; i++) {
@@ -214,6 +226,73 @@ page.rormToJSON = function (form) {
       jsonOutput[name] = val;
     }
   }
-  return JSON.stringify(jsonOutput, null, 2);
+  return jsonOutput;
 };
 
+page.getDateOfBirthFromRC = function (rc = '') {
+  try {
+
+    let year = parseInt(rc.substring(0, 2), 10);
+    let thisYear = new Date().getFullYear() - 2000;
+    if (year <= thisYear) year += 2000;
+    else year += 1900;
+    if (year < page.minYearOfBirth) return false;
+
+    let month = parseInt(rc.substring(2, 4), 10);
+    if (month >= 50) month -= 50;
+    if (month > 12 || month < 1) return false;
+    month -= 1;
+
+    let day = parseInt(rc.substring(4, 6), 10);
+    if (day < 1 || day > 31) return false;
+
+    return new Date(year, month, day);
+  } catch (e) {
+    return false;
+  }
+};
+
+page.getAge = function (date, dateOfBirth) {
+  var diff_ms = date - dateOfBirth.getTime();
+  var age_dt = new Date(diff_ms);
+  return Math.abs(age_dt.getUTCFullYear() - 1970);
+};
+
+// https://www.zizka.ch/pages/programming/ruzne/rodne-cislo-identifikacni-cislo-rc-ico-kontrola-validace.html
+page.testRC = function(x, age) {
+  if (!age) age = 0;
+  try {
+    if (x.length == 0) return true;
+    if (x.length < 9) throw 1;
+    var year = parseInt(x.substr(0, 2), 10);
+    var month = parseInt(x.substr(2, 2), 10);
+    var day = parseInt(x.substr(4, 2), 10);
+    var ext = parseInt(x.substr(6, 3), 10);
+    if ((x.length == 9) && (year < 54)) return true;
+    var c = 0;
+    if (x.length == 10) c = parseInt(x.substr(9, 1));
+    var m = parseInt(x.substr(0, 9)) % 11;
+    if (m == 10) m = 0;
+    if (m != c) throw 1;
+    year += (year < 54) ? 2000 : 1900;
+    if ((month > 70) && (year > 2003)) month -= 70;
+    else if (month > 50) month -= 50;
+    else if ((month > 20) && (year > 2003)) month -= 20;
+    var d = new Date();
+    if ((year + age) > d.getFullYear()) throw 1;
+    if (month == 0) throw 1;
+    if (month > 12) throw 1;
+    if (day == 0) throw 1;
+    if (day > 31) throw 1;
+  }
+  catch (e) {
+    return false;
+  }
+  return true;
+};
+
+page.convertDate = function (inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat);
+  return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('.')
+};
