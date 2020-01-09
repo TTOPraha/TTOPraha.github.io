@@ -79,8 +79,8 @@ page.sendApplication = () => {
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4 && xhr.status == 200) page.printForm();
-    if (!(xhr.readyState == 4 && xhr.status == 200) && page.testVersion) page.printForm();
+    if (xhr.readyState === 4 && xhr.status === 200) page.printForm();
+    if (xhr.readyState === 4 && xhr.status !== 200 && page.testVersion) page.printForm();
 
   };
   xhr.send(formData);
