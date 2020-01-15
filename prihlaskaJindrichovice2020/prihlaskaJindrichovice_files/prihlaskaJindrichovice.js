@@ -4,6 +4,9 @@ let page = {};
 page.testVersion = true;
 page.dateOfCampStart = new Date(2020, 6, 12);
 page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
+// page.serverLocation = 'http://localhost:8080/prihlaskaJindrichovice';
+page.serverLocation = 'https://audiopexeso.herokuapp.com/prihlaskaJindrichovice2020';
+
 
 window.onload = () => {
   page.init();
@@ -17,16 +20,13 @@ page.init = async () => {
   document.querySelector('#clearForSibling').addEventListener('click', page.clearForSiblingEntry);
 };
 
-page.printTestVersion = () => {
+page.printTestVersion = async () => {
   page.createTestingVersion();
   page.resizeTextAreas();
   document.querySelector('#frmRegSignature').style.display = 'block';
   document.querySelector('#submitForm').style.display = 'none';
   document.querySelector('#clearForSibling').style.display = 'none';
-  window.print();
-  document.location.reload();
-  document.querySelector('#submitForm').style.display = 'inline';
-  document.querySelector('#clearForSibling').style.display = 'inline';
+  page.sendApplication(true);
 };
 
 page.printForm = () => {
@@ -57,34 +57,37 @@ page.fillDateOfBirth = () => {
 
 };
 
-page.sendApplication = () => {
-  let formElement = document.querySelector("#frmRegistration");
-  let formData = page.formToJSON(formElement);
-  console.log(formData);
+page.sendApplication = (test=false) => {
+  const formElement = document.querySelector("#frmRegistration");
+  let formData = page.formToJSON(formElement, 'Prihlaska', 'Jindrichovice2020');
 
-  let dateOfBirth = page.getDateOfBirthFromRC(formData.diteRC);
+  const dateOfBirth = page.getDateOfBirthFromRC(formData.diteRC);
   if (!dateOfBirth) {
     alert('Rodné číslo není ve správném formátu');
     return;
   } 
-  let age = page.getAge(page.dateOfCampStart, dateOfBirth);
+  const age = page.getAge(page.dateOfCampStart, dateOfBirth);
     
   document.querySelector('#diteDatumNarozeni').value = page.convertDate(dateOfBirth);
   document.querySelector('#diteVek').value = age;
 
+  formData.diteDatumNarozeni = dateOfBirth.toISOString();
+  formData.diteVek = age;
+
+  // const formDataText = JSON.stringify(formData);
+  const formDataText = JSON.stringify(formData);
+
   let xhr = new XMLHttpRequest();
-  let url = "../zpracuj.php";
-  if (page.testVersion) url = "../zpracuj.php";
 
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.open("POST", page.serverLocation, true);
+  xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
   xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4 && xhr.status === 200) page.printForm();
-    if (xhr.readyState === 4 && xhr.status !== 200 && page.testVersion) page.printForm();
-
+    if (xhr.readyState === 4) console.log(xhr.status);
+    if (xhr.readyState === 4 && xhr.status === 201) page.printForm();
+    if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
+    if (xhr.readyState === 4 && test) document.location.reload();
   };
-  xhr.send(formData);
-
+  xhr.send(formDataText);
 };
 
 page.forward = async () => {
@@ -202,8 +205,11 @@ page.clearForSiblingEntry = () => {
 };
 
 
-page.formToJSON = function (form) {
+page.formToJSON = function (form, idKey, idValue) {
   let jsonOutput = {};
+
+  if (idKey) jsonOutput[idKey] = idValue;
+
   // Loop through each field in the form
   for (let i = 0; i < form.elements.length; i++) {
 
@@ -217,11 +223,9 @@ page.formToJSON = function (form) {
     if (field.type === 'radio') {
       if (field.checked) jsonOutput[name] = val;
     }
-
     else if (field.type === 'checkbox') {
-      jsonOutput[val] = (field.checked === true) ? 'ANO' : 'Ne';
+      jsonOutput[val] = (field.checked === true) ? 'ANO' : 'NE';
     }
-
     else {
       jsonOutput[name] = val;
     }
