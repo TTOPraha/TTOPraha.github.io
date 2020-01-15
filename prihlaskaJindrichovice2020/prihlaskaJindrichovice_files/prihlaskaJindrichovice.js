@@ -7,10 +7,17 @@ page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
 // page.serverLocation = 'http://localhost:8080/prihlaskaJindrichovice';
 page.serverLocation = 'https://audiopexeso.herokuapp.com/prihlaskaJindrichovice';
 
-
 window.onload = () => {
   page.init();
   if (page.testVersion) page.createTestingVersion();
+
+  // to wake up heroku
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://audiopexeso.herokuapp.com', true);
+  xhr.onreadystatechange = () => {
+    console.log(xhr.status);
+  };
+  xhr.send();
 };
 
 page.init = async () => {
@@ -38,7 +45,6 @@ page.printForm = () => {
   document.querySelector('#frmRegSignature').style.display = 'none';
   document.querySelector('#submitForm').style.display = 'inline';
   document.querySelector('#clearForSibling').style.display = 'inline';
-
 };
 
 page.resizeTextAreas = () => {
@@ -51,10 +57,6 @@ page.resizeTextAreas = () => {
     tArea.style.cssText = 'height:auto; padding:0';
     tArea.style.cssText = 'height:' + (tArea.scrollHeight + 10) + 'px';
   }
-};
-
-page.fillDateOfBirth = () => {
-
 };
 
 page.sendApplication = (test=false) => {
@@ -78,7 +80,6 @@ page.sendApplication = (test=false) => {
   const formDataText = JSON.stringify(formData);
 
   let xhr = new XMLHttpRequest();
-
   xhr.open("POST", page.serverLocation, true);
   xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
   xhr.onreadystatechange = () => {
@@ -90,14 +91,14 @@ page.sendApplication = (test=false) => {
   xhr.send(formDataText);
 };
 
-page.forward = async () => {
-  window.scrollTo(0, 0);
-  // případně přesměrovat na info/homepage? 
-  // window.location.replace("podzimky2019.html");
-  setTimeout(() => {
-    alert("Přihláška byla v pořádku odeslána.\nProsím vyčkejte na potvrzující e-mail");
-  }, 50);
-};
+// page.forward = async () => {
+//   window.scrollTo(0, 0);
+//   // případně přesměrovat na info/homepage? 
+//   // window.location.replace("podzimky2019.html");
+//   setTimeout(() => {
+//     alert("Přihláška byla v pořádku odeslána.\nProsím vyčkejte na potvrzující e-mail");
+//   }, 50);
+// };
 
 page.createTestingVersion = () => {
   page.testVersion = true;
@@ -203,7 +204,6 @@ page.clearForSiblingEntry = () => {
   document.getElementsByName("nocniHra")[0].checked = false;
   document.getElementsByName("childCharacteristics")[0].value = "";
 };
-
 
 page.formToJSON = function (form, idKey, idValue) {
   let jsonOutput = {};
