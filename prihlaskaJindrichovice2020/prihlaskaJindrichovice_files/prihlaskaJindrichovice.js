@@ -5,7 +5,7 @@ page.testVersion = true;
 page.dateOfCampStart = new Date(2020, 6, 12);
 page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
 // page.serverLocation = 'http://localhost:8080/prihlaskaJindrichovice';
-page.serverLocation = 'https://audiopexeso.herokuapp.com/prihlaskaJindrichovice2020';
+page.serverLocation = 'https://audiopexeso.herokuapp.com/prihlaskaJindrichovice';
 
 
 window.onload = () => {
