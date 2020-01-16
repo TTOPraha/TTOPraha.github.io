@@ -86,7 +86,7 @@ page.sendApplication = (test=false) => {
     if (xhr.readyState === 4) console.log(xhr.status);
     if (xhr.readyState === 4 && xhr.status === 201) page.printForm();
     if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
-    if (xhr.readyState === 4 && test) document.location.reload();
+    if (xhr.readyState === 4 && test === true) document.location.reload();
   };
   xhr.send(formDataText);
 };
@@ -174,6 +174,8 @@ page.clearForSiblingEntry = () => {
   document.getElementsByName("diteJmeno")[0].value = "";
   document.getElementsByName("diteRC")[0].value = "";
   document.getElementsByName("diteZTPP")[0].value = "";
+  document.getElementsByName("diteDatumNarozeni")[0].value = "";
+  document.getElementsByName("diteVek")[0].value = "";
 
   // 4
   document.getElementsByName("jakDiteVidi")[0].checked = false;
