@@ -23,14 +23,14 @@ window.onload = () => {
   xhr.send();
 };
 
-page.init = async () => {
+page.init = () => {
   document.querySelector('main').style.display = 'block';
   document.querySelector('#frmRegistration').addEventListener('submit', page.sendApplication);
   document.querySelector('#testPrint').addEventListener('click', page.printTestVersion);
   document.querySelector('#clearForSibling').addEventListener('click', page.clearForSiblingEntry);
 };
 
-page.printTestVersion = async () => {
+page.printTestVersion = () => {
   if (document.querySelector('#diteJmeno').value !== '') {
     alert('Přihláška není prázdná. Pro předejití ztráty dat prosím otestujte v novém okně.');
     return;
