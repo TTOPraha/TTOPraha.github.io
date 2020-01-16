@@ -4,15 +4,6 @@
   --dark-grey: #2e2e2e;
   --title-color: #050505;
   --default-space: 0.25cm;
-  box-sizing: border-box;
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
-@page {
-  margin: 1cm 0cm 1cm 0cm;
 }
 
 body {
@@ -20,10 +11,8 @@ body {
   font-family: Verdana, sans-serif;
   font-size: 0.9rem;
   margin-left: 5%;
-  /* margin-Right: 5%; */
   vertical-align: center;
   margin-top: 20px;
-  /* width: 800px; */
   width: 19cm;
 }
 
@@ -112,7 +101,7 @@ input, label, textarea {
 textarea {
   width: 100%;
   min-height: 1cm;
-  /* resize: vertical; */
+  resize: vertical;
   height: auto;
 }
 
