@@ -44,8 +44,8 @@ page.printForm = () => {
   document.querySelector('#frmRegSignature').style.display = 'block';
   document.querySelector('#submitForm').style.display = 'none';
   document.querySelector('#clearForSibling').style.display = 'none';
-  window.print();
   document.querySelector('#applicationNotSent').style.display = 'none';
+  window.print();
   document.querySelector('#frmRegSignature').style.display = 'none';
   document.querySelector('#submitForm').style.display = 'inline';
   document.querySelector('#clearForSibling').style.display = 'inline';
