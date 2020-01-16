@@ -1,7 +1,10 @@
 let page = {};
 
 // na ostré verzi změnit na false
-page.testVersion = true;
+
+if (window.location.pathname.split("/").pop() === 'test.html') page.testVersion = true;
+else page.testVersion = false;
+
 page.dateOfCampStart = new Date(2020, 6, 12);
 page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
 // page.serverLocation = 'http://localhost:8080/prihlaskaJindrichovice';
