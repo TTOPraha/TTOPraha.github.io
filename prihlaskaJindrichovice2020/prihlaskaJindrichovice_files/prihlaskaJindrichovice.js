@@ -68,7 +68,7 @@ page.resizeTextAreas = () => {
 
 page.sendApplication = (test=false) => {
   const formElement = document.querySelector("#frmRegistration");
-  let formData = page.formToJSON(formElement, 'Prihlaska', 'Jindrichovice2020', true);
+  let formData = page.formToJSON(formElement, 'prihlaska', 'Jindrichovice2020', true);
 
   const dateOfBirth = page.getDateOfBirthFromRC(formData.diteRC);
   if (!dateOfBirth) {
