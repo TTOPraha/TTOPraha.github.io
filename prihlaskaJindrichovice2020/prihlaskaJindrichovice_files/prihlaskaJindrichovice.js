@@ -61,7 +61,7 @@ page.resizeTextAreas = () => {
 
 page.sendApplication = (test=false) => {
   const formElement = document.querySelector("#frmRegistration");
-  let formData = page.formToJSON(formElement, 'Prihlaska', 'Jindrichovice2020');
+  let formData = page.formToJSON(formElement, 'Prihlaska', 'Jindrichovice2020', true);
 
   const dateOfBirth = page.getDateOfBirthFromRC(formData.diteRC);
   if (!dateOfBirth) {
@@ -78,17 +78,18 @@ page.sendApplication = (test=false) => {
 
   // const formDataText = JSON.stringify(formData);
   const formDataText = JSON.stringify(formData);
+  console.log(formData);
 
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", page.serverLocation, true);
-  xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4) console.log(xhr.status);
-    if (xhr.readyState === 4 && xhr.status === 201) page.printForm();
-    if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
-    if (xhr.readyState === 4 && test === true) document.location.reload();
-  };
-  xhr.send(formDataText);
+  // let xhr = new XMLHttpRequest();
+  // xhr.open("POST", page.serverLocation, true);
+  // xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+  // xhr.onreadystatechange = () => {
+  //   if (xhr.readyState === 4) console.log(xhr.status);
+  //   if (xhr.readyState === 4 && xhr.status === 201) page.printForm();
+  //   if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
+  //   if (xhr.readyState === 4 && test === true) document.location.reload();
+  // };
+  // xhr.send(formDataText);
 };
 
 // page.forward = async () => {
@@ -207,10 +208,11 @@ page.clearForSiblingEntry = () => {
   document.getElementsByName("childCharacteristics")[0].value = "";
 };
 
-page.formToJSON = function (form, idKey, idValue) {
+page.formToJSON = function (form, idKey='', idValue='', timeStamp=false) {
   let jsonOutput = {};
 
-  if (idKey) jsonOutput[idKey] = idValue;
+  if (timeStamp === true) jsonOutput.timeStamp = new Date().toISOString();
+  if (idKey !== '' && idValue !== '') jsonOutput[idKey] = idValue;
 
   // Loop through each field in the form
   for (let i = 0; i < form.elements.length; i++) {
