@@ -76,20 +76,18 @@ page.sendApplication = (test=false) => {
   formData.diteDatumNarozeni = dateOfBirth.toISOString();
   formData.diteVek = age;
 
-  // const formDataText = JSON.stringify(formData);
   const formDataText = JSON.stringify(formData);
-  console.log(formData);
 
-  // let xhr = new XMLHttpRequest();
-  // xhr.open("POST", page.serverLocation, true);
-  // xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
-  // xhr.onreadystatechange = () => {
-  //   if (xhr.readyState === 4) console.log(xhr.status);
-  //   if (xhr.readyState === 4 && xhr.status === 201) page.printForm();
-  //   if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
-  //   if (xhr.readyState === 4 && test === true) document.location.reload();
-  // };
-  // xhr.send(formDataText);
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", page.serverLocation, true);
+  xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) console.log(xhr.status);
+    if (xhr.readyState === 4 && xhr.status === 201) page.printForm();
+    if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
+    if (xhr.readyState === 4 && test === true) document.location.reload();
+  };
+  xhr.send(formDataText);
 };
 
 // page.forward = async () => {
