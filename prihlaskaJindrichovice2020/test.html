@@ -36,11 +36,10 @@
         <p>
           V zájmu vašeho dítěte a všech dalších dětí a vedoucích tábora prosíme o svědomité vyplnění přihlášky.</p>
         <p>
-          Vyplněnou přihlášku prosím vytiskněte, podepište a naskenovanou nebo nafocenou pošlete na e-mailovou adresu
-          hlavní vedoucí tábora.
+          Vyplněnou přihlášku prosím vytiskněte, podepište a naskenovanou nebo nafocenou pošlete na uvedenou e-mailovou adresu.
         </p>
         <p>
-          Přihlášku nebude možné uložit. Ujistěte se, že je z vašeho prohlížeče možné tisknout alespoň do formátu pdf. Doporučujeme používat aktuální verzi prohlížeče Chrome, Firefox, Opera nebo Edge. Tisk přihlášky je možné vyzkoušet kliknutím <a id="testPrint" href="#">sem</a>. V případě technických problémů prosím kontaktuje webmastera na 73737 0604.
+          Přihlášku nebude možné uložit. Ujistěte se prosím, že je z vašeho prohlížeče možné tisknout alespoň do formátu pdf. Doporučujeme používat aktuální verzi prohlížeče Chrome, Firefox, Opera nebo Edge. Tisk přihlášky je možné vyzkoušet kliknutím <a id="testPrint" href="#">sem</a>. V případě technických problémů prosím kontaktuje webmastera na 73737 0604.
         </p>
         <p>
           Prosím ujistěte se, že budete moci odpovědět na všechny otázky a že budete mít dostatek času na její vyplnění. 
@@ -82,14 +81,17 @@
           <label for="diteadresa"><span class="fs090em">2.5)</span> Adresa bydliště</label>
           <input type="text" name="diteadresa" id="diteadresa" min-length="2" required>
         </div>
-        <div class="w50PerCent">
-          <label for="diteDatumNarozeni"><span class="fs090em">2.6)</span> Datum Narození</label>
-          <input type="text" name="diteDatumNarozeni" id="diteDatumNarozeni" disabled>
+        <div id="dateofBirthDiv" style="display:none">
+          <div class="w50PerCent">
+            <label for="diteDatumNarozeni"><span class="fs090em">2.6)</span> Datum Narození</label>
+            <input type="text" name="diteDatumNarozeni" id="diteDatumNarozeni" disabled>
+          </div>
+          <div class="w50PerCent">
+            <label for="diteVek"><span class="fs090em">2.7)</span> Věk v době tábora</label>
+            <input type="text" name="diteVek" id="diteVek" disabled>
+          </div>
         </div>
-        <div class="w50PerCent">
-          <label for="diteVek"><span class="fs090em">2.7)</span> Věk v době tábora</label>
-          <input type="text" name="diteVek" id="diteVek" disabled>
-        </div>
+        
       </fieldset>
 
       <fieldset id="frmRegContactPersons" class="avoidPageBreakInside">
@@ -125,7 +127,7 @@
         </div>
         <div class="w50PerCent">
           <label for="zakZast2Email"><span class="fs090em">3.8)</span> e-mail</label>
-          <input type="email" name="zakZast2Email" id="zakZast2Email" required>
+          <input type="email" name="zakZast2Email" id="zakZast2Email">
         </div>
         <div class="w50PerCent">
           <label for="contact3Name"><span class="fs090em">3.9)</span> Jméno další kontaktní osoby (nepovinné)</label>
@@ -364,7 +366,7 @@
           <label><input type="checkbox" name="udajePravdive" value="udajePravdive" required>Prohlašuji, že výše uvedné
             informace jsou pravdivé a zavazuji se hlavní vedoucí informovat o případných změnách.</label>
           <label><input type="checkbox" name="diteJeZpusobile" value="diteJeZpusobile" required>Prohlašuji, že dítě je
-            způsobilé k účasti na akci. (V případě pochybností nejprve konzultujte praktickým lékařem dítěte)</label>
+            způsobilé k účasti na akci. (V případě pochybností nejprve konzultujte s praktickým lékařem dítěte)</label>
         </div>
       </fieldset>
       <p id="applicationNotSent" style="font-weight:bold">Dosud neověřeno - prosím zkontrolujte a vytiskněte přihlašku:</p id>

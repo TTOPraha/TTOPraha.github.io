@@ -31,11 +31,12 @@ page.init = async () => {
 };
 
 page.printTestVersion = async () => {
+  if (document.querySelector('#diteJmeno').value !== '') {
+    alert('Přihláška není prázdná. Pro předejití ztráty dat prosím otestujte v novém okně.');
+    return;
+  }
   page.createTestingVersion();
   page.resizeTextAreas();
-  document.querySelector('#frmRegSignature').style.display = 'block';
-  document.querySelector('#submitForm').style.display = 'none';
-  document.querySelector('#clearForSibling').style.display = 'none';
   page.sendApplication(true);
 };
 
@@ -45,7 +46,9 @@ page.printForm = () => {
   document.querySelector('#submitForm').style.display = 'none';
   document.querySelector('#clearForSibling').style.display = 'none';
   document.querySelector('#applicationNotSent').style.display = 'none';
+  document.querySelector('#dateofBirthDiv').style.display = 'block';
   window.print();
+  document.querySelector('#dateofBirthDiv').style.display = 'none';
   document.querySelector('#frmRegSignature').style.display = 'none';
   document.querySelector('#submitForm').style.display = 'inline';
   document.querySelector('#clearForSibling').style.display = 'inline';
