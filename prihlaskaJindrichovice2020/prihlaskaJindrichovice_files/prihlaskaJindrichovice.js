@@ -45,6 +45,7 @@ page.printForm = () => {
   document.querySelector('#submitForm').style.display = 'none';
   document.querySelector('#clearForSibling').style.display = 'none';
   window.print();
+  document.querySelector('#applicationNotSent').style.display = 'none';
   document.querySelector('#frmRegSignature').style.display = 'none';
   document.querySelector('#submitForm').style.display = 'inline';
   document.querySelector('#clearForSibling').style.display = 'inline';
@@ -207,6 +208,8 @@ page.clearForSiblingEntry = () => {
   document.getElementsByName("umiPlavat")[1].checked = false;
   document.getElementsByName("nocniHra")[0].checked = false;
   document.getElementsByName("childCharacteristics")[0].value = "";
+  
+  document.querySelector('#applicationNotSent').style.display = 'block';
 };
 
 page.formToJSON = function (form, idKey='', idValue='', timeStamp=false) {
