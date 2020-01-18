@@ -1,14 +1,18 @@
 let page = {};
 
 // na ostré verzi změnit na false
-
 if (window.location.pathname.split("/").pop() === 'test.html') page.testVersion = true;
 else page.testVersion = false;
 
+console.log(window.location.origin);
+
+if (window.location.origin === 'http://127.0.0.1:8081')
+  page.serverLocation = 'http://localhost:8080';
+else
+  page.serverLocation = 'https://audiopexeso.herokuapp.com';
+
 page.dateOfCampStart = new Date(2020, 6, 12);
 page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
-// page.serverLocation = 'http://localhost:8080/prihlaskaJindrichovice';
-page.serverLocation = 'https://audiopexeso.herokuapp.com/prihlaskaJindrichovice';
 
 window.onload = () => {
   page.init();
@@ -16,7 +20,7 @@ window.onload = () => {
 
   // to wake up heroku
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://audiopexeso.herokuapp.com', true);
+  xhr.open('GET', page.serverLocation, true);
   xhr.onreadystatechange = () => {
     console.log(xhr.status);
   };
@@ -86,7 +90,7 @@ page.sendApplication = (test=false) => {
   const formDataText = JSON.stringify(formData);
 
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", page.serverLocation, true);
+  xhr.open("POST", page.serverLocation + '/prihlaskaJindrichovice', true);
   xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) console.log(xhr.status);
