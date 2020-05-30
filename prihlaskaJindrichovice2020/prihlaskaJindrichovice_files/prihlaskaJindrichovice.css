@@ -110,7 +110,9 @@ div.verticalElements>label {
 }
 
 input[type=submit], input[type=button] {
-  width: auto
+  width: 7cm;
+  display: block;
+  margin-bottom: 4px;
 }
 
 span.fs090em {

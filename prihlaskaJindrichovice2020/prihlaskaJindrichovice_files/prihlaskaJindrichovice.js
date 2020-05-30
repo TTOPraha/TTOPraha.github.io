@@ -18,13 +18,22 @@ window.onload = () => {
   page.init();
   if (page.testVersion) page.createTestingVersion();
 
-  // to wake up heroku
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', page.serverLocation, true);
-  xhr.onreadystatechange = () => {
-    console.log(xhr.status);
-  };
-  xhr.send();
+  const formInProgress = localStorage.getItem('fromInProgress');
+  if (formInProgress) {
+    const formElement = document.querySelector("#frmRegistration");
+    page.JSONToForm(formElement, JSON.parse( formInProgress));
+  }
+
+  setInterval(() => {
+    // to wake up heroku
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', page.serverLocation, true);
+    xhr.onreadystatechange = () => {
+      console.log(xhr.status);
+    };
+    xhr.send();
+
+  }, 60000);
 };
 
 page.init = () => {
@@ -32,13 +41,12 @@ page.init = () => {
   document.querySelector('#frmRegistration').addEventListener('submit', page.sendApplication);
   document.querySelector('#testPrint').addEventListener('click', page.printTestVersion);
   document.querySelector('#clearForSibling').addEventListener('click', page.clearForSiblingEntry);
+  document.querySelector('#saveForLater').addEventListener('click', page.saveForLater);
+  document.querySelector('#clearForm').addEventListener('click', page.clearForm);  
 };
 
 page.printTestVersion = () => {
-  if (document.querySelector('#diteJmeno').value !== '') {
-    alert('Přihláška není prázdná. Pro předejití ztráty dat prosím otestujte v novém okně.');
-    return;
-  }
+  page.saveForLater();
   page.createTestingVersion();
   page.resizeTextAreas();
   page.sendApplication(true);
@@ -64,7 +72,7 @@ page.resizeTextAreas = () => {
         
   for (let i = 0; i < l; i++) {
     const tArea = textAreas[i];
-    tArea.style.cssText = "overflow:hidden";
+    tArea.style.cssText = 'overflow:hidden';
     tArea.style.cssText = 'height:auto; padding:0';
     tArea.style.cssText = 'height:' + (tArea.scrollHeight + 10) + 'px';
   }
@@ -99,6 +107,15 @@ page.sendApplication = (test=false) => {
     if (xhr.readyState === 4 && test === true) document.location.reload();
   };
   xhr.send(formDataText);
+};
+
+page.saveForLater = () => {
+  const formElement = document.querySelector("#frmRegistration");
+  localStorage.setItem('fromInProgress', JSON.stringify(page.formToJSON(formElement)));
+};
+
+page.clearForm = () => {
+  document.querySelector("#frmRegistration").reset();
 };
 
 // page.forward = async () => {
@@ -246,6 +263,60 @@ page.formToJSON = function (form, idKey='', idValue='', timeStamp=false) {
     }
   }
   return jsonOutput;
+};
+
+
+page.formToJSON = function (form, idKey='', idValue='', timeStamp=false) {
+  let jsonOutput = {};
+
+  if (timeStamp === true) jsonOutput.timeStamp = new Date().toISOString();
+  if (idKey !== '' && idValue !== '') jsonOutput[idKey] = idValue;
+
+  // Loop through each field in the form
+  for (let i = 0; i < form.elements.length; i++) {
+
+    let field = form.elements[i];
+
+    // Don't serialize fields without a name, submits, buttons, file and reset inputs, and disabled fields
+    if (!field.name || field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') continue;
+    let val = field.value;
+    let name = field.name;
+
+    if (field.type === 'radio') {
+      if (field.checked) jsonOutput[name] = val;
+    }
+    else if (field.type === 'checkbox') {
+      jsonOutput[val] = (field.checked === true) ? 'ANO' : 'NE';
+    }
+    else {
+      jsonOutput[name] = val;
+    }
+  }
+  return jsonOutput;
+};
+
+page.JSONToForm = function (form, JSONData) {
+
+  // Loop through each field in the form
+  for (let i = 0; i < form.elements.length; i++) {
+
+    let field = form.elements[i];
+
+    // Don't serialize fields without a name, submits, buttons, file and reset inputs, and disabled fields
+    if (!field.name || field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') continue;
+    let val = field.value;
+    let name = field.name;
+
+    if (field.type === 'radio') {
+      if (JSONData[name] === val) field.checked = true;
+    }
+    else if (field.type === 'checkbox') {
+      field.checked = (JSONData[val] === 'ANO') ? true : false;
+    }
+    else {
+      field.value = JSONData[name];
+    }
+  }
 };
 
 page.getDateOfBirthFromRC = function (rc = '') {
