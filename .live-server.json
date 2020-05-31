@@ -1,0 +1,14 @@
+{
+    "port": 8181,
+    "host": "0.0.0.0",
+    "root": "/prihlaskaJindrichovice2020",
+    "open": false,
+    "ignore": "",
+    "file": "index.html",
+    "wait": 1000,
+    "mount": [
+        ["/components", "./node_modules"],
+        ["/image", "./myImageFolder"]
+    ],
+    "logLevel": 2
+}

@@ -1,10 +1,10 @@
 let page = {};
+page.applicationID = null;
 
 // na ostré verzi změnit na false
 if (window.location.pathname.split("/").pop() === 'test.html') page.testVersion = true;
 else page.testVersion = false;
 
-console.log(window.location.origin);
 
 if (window.location.origin === 'http://127.0.0.1:8081')
   page.serverLocation = 'http://localhost:8080';
@@ -43,6 +43,7 @@ page.init = () => {
   document.querySelector('#clearForSibling').addEventListener('click', page.clearForSiblingEntry);
   document.querySelector('#saveForLater').addEventListener('click', page.saveForLater);
   document.querySelector('#clearForm').addEventListener('click', page.clearForm);  
+  document.querySelector('#clearLocalStorage').addEventListener('click', page.clearLocalStorage);
 };
 
 page.printTestVersion = () => {
@@ -95,7 +96,12 @@ page.sendApplication = (test=false) => {
   formData.diteDatumNarozeni = dateOfBirth.toISOString();
   formData.diteVek = age;
 
+  
+  if (!page.ApplicationID) page.applicationID = Date.now();
+  formData.applicationID = page.applicationID;
+
   const formDataText = JSON.stringify(formData);
+
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", page.serverLocation + '/prihlaskaJindrichovice', true);
@@ -112,6 +118,7 @@ page.sendApplication = (test=false) => {
 page.saveForLater = () => {
   const formElement = document.querySelector("#frmRegistration");
   localStorage.setItem('fromInProgress', JSON.stringify(page.formToJSON(formElement)));
+  alert("Přihláška byla uložena v paměti vašeho prohlížeče");
 };
 
 page.clearForm = () => {
@@ -234,6 +241,10 @@ page.clearForSiblingEntry = () => {
   document.getElementsByName("childCharacteristics")[0].value = "";
   
   document.querySelector('#applicationNotSent').style.display = 'block';
+};
+
+page.clearLocalStorage = () => {
+  localStorage.setItem('fromInProgress', '');
 };
 
 page.formToJSON = function (form, idKey='', idValue='', timeStamp=false) {
