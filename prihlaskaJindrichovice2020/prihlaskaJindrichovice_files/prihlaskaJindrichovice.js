@@ -59,12 +59,21 @@ page.printForm = () => {
   document.querySelector('#submitForm').style.display = 'none';
   document.querySelector('#clearForSibling').style.display = 'none';
   document.querySelector('#applicationNotSent').style.display = 'none';
+
   document.querySelector('#dateofBirthDiv').style.display = 'block';
+
+  document.querySelector('#saveForLater').style.display = 'none';
+  document.querySelector('#clearForm').style.display = 'none';  
+  document.querySelector('#clearLocalStorage').style.display = 'none';
   window.print();
   document.querySelector('#dateofBirthDiv').style.display = 'none';
   document.querySelector('#frmRegSignature').style.display = 'none';
   document.querySelector('#submitForm').style.display = 'inline';
   document.querySelector('#clearForSibling').style.display = 'inline';
+  
+  document.querySelector('#saveForLater').style.display = 'block';
+  document.querySelector('#clearForm').style.display = 'block';  
+  document.querySelector('#clearLocalStorage').style.display = 'block';
 };
 
 page.resizeTextAreas = () => {
