@@ -1,12 +1,12 @@
 let page = {};
-page.applicationID = null;
+page.applicationID = '';
 
 // na ostré verzi změnit na false
 if (window.location.pathname.split("/").pop() === 'test.html') page.testVersion = true;
 else page.testVersion = false;
 
 
-if (window.location.origin === 'http://127.0.0.1:8081')
+if (window.location.origin === 'http://127.0.0.1:8081' || window.location.origin === 'http://localhost:8081')
   page.serverLocation = 'http://localhost:8080';
 else
   page.serverLocation = 'https://audiopexeso.herokuapp.com';
@@ -65,6 +65,7 @@ page.printForm = () => {
   document.querySelector('#saveForLater').style.display = 'none';
   document.querySelector('#clearForm').style.display = 'none';  
   document.querySelector('#clearLocalStorage').style.display = 'none';
+
   window.print();
   document.querySelector('#dateofBirthDiv').style.display = 'none';
   document.querySelector('#frmRegSignature').style.display = 'none';
@@ -106,8 +107,10 @@ page.sendApplication = (test=false) => {
   formData.diteVek = age;
 
   
-  if (!page.ApplicationID) page.applicationID = Date.now();
+  if (page.applicationID === '') page.applicationID = Date.now();
   formData.applicationID = page.applicationID;
+  
+  console.log('page.applicationID:', page.applicationID);
 
   const formDataText = JSON.stringify(formData);
 
@@ -131,7 +134,8 @@ page.saveForLater = () => {
 };
 
 page.clearForm = () => {
-  document.querySelector("#frmRegistration").reset();
+  page.clearLocalStorage();
+  window.location.reload();
 };
 
 // page.forward = async () => {
@@ -250,6 +254,15 @@ page.clearForSiblingEntry = () => {
   document.getElementsByName("childCharacteristics")[0].value = "";
   
   document.querySelector('#applicationNotSent').style.display = 'block';
+  
+  page.clearLocalStorage();
+  
+  document.querySelector('#applicationNotSent').style.display = 'block';
+  document.querySelector('#dateofBirthDiv').style.display = 'block';
+  document.querySelector('#saveForLater').style.display = 'block';
+  document.querySelector('#clearForm').style.display = 'block';  
+  document.querySelector('#clearLocalStorage').style.display = 'block';
+
 };
 
 page.clearLocalStorage = () => {
