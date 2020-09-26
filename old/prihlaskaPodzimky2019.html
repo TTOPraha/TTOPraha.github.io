@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="cz">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="content-language" content="cs">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Přihláška podzimky 2019</title>
+  <link rel="stylesheet" href="./prihlaskaPodzimky2019_files/prihlaskaPodzimky2019.css">
+  <script src="./prihlaskaPodzimky2019_files/prihlaskaPodzimky2019.js"></script>
+</head>
+
+<body>
+  <main>
+  <h1>PŘIHLÁŠKA NA PODZIMKY 2019 s TTO</h1>
+  <h4>Pořádá: Tyfloturistický oddíl, z.s., Bořivojova 774/65, 130 00, Praha Žižkov</h4>
+
+  <form id="frmRegistration" onsubmit="return false">
+    <fieldset>
+      <legend> <span class="fs090em">1)</span> Pokyny k vyplnění přihlášky</legend>
+      <p>Podrobné informace o akci zobrazíte kliknutím na tento <a href="./podzimky2019.html" target="_blank">odkaz</a>.
+      </p>
+      <p>Kontaktní osoba: hlavní vedoucí Klára Krupová <a
+          href="mailto:krupova.klara234@gmail.com">krupova.klara234@gmail.com</a> tel: 721 930 019.</p>
+      <p>V zájmu vašeho dítěte a všech dalších dětí a vedoucích prosíme o opravdu svědomité vyplnění přihlášky.</p>
+
+      <p>Pokud není uvedeno jinak, jsou všechny otázky povinné.
+      </p>
+    </fieldset>
+
+    <fieldset id="frmRegChildPersonalData" class="avoidPageBreakInside">
+      <legend><span class="fs090em">2)</span> Obecné údaje o dítěti</legend>
+      <div class="w50PerCent">
+        <label for="diteJmeno"><span class="fs090em">2.1)</span> Jméno dítěte</label>
+        <input type="text" name="diteJmeno" minlength="6" title="Jméno je přiliš krátké" required>
+      </div>
+      <div class="w25PerCent">
+        <label for="diteRC"><span class="fs090em">2.2)</span> Rodné číslo</label>
+        <input name="diteRC" pattern="[0-9]{6}\/[0-9]{4}" value="" type="text"
+          title="Prosím zadejte rodné číslo - např. 091231/0001" required>
+      </div>
+      <div class="w25PerCent">
+        <label for="diteZTPP"><span class="fs090em">2.4)</span> Číslo ZTP-P (má-li)</label>
+        <input type="text" name="diteZTPP" minlength="6">
+      </div>
+      <div class="w50PerCent">
+        <label for="ditePojistovna"><span class="fs090em">2.3)</span> Zdravotní pojišťovna</label>
+        <input type="text" name="ditePojistovna" minlength="2" title="Název je přiliš krátký" required>
+      </div>
+      <div class="w50PerCent">
+        <label for="diteadresa"><span class="fs090em">2.5)</span> Adresa bydliště</label>
+        <input type="text" name="diteadresa" minlength="10" required>
+      </div>
+      <div class="w100PerCent">
+        <label for="diteCharakterizuj"><span class="fs090em">6.5)</span> Prosím charakterizujte vaše dítě (např.:
+          "Honzík je veselý klučík, který zpočátku bývá stydlivý, má strach, že si na táboře nenajde kamarády. Moc ho
+          baví lesnictví atd..." nebo: "Anička je chytrá holka a má ráda koně, atd...")</label>
+        <textarea name="diteCharakterizuj" minlength="6" required></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset id="frmRegContactPersons" class="avoidPageBreakInside">
+      <legend><span class="fs090em">3)</span> Kontaktní osoby</legend>
+      <div class="w50PerCent">
+        <label for="zakZastJmeno"><span class="fs090em">3.1)</span> Jméno zákonného zástupce</label>
+        <input type="text" name="zakZastJmeno" minlength="6" required>
+      </div>
+      <div class="w50PerCent">
+        <label for="zakZastVztah"><span class="fs090em">3.2)</span> Vztah k dítěti (matka, otec,…) </label>
+        <input type="text" name="zakZastVztah" required minlength="3">
+      </div>
+      <div class="w50PerCent">
+        <label for="zakZasTel"><span class="fs090em">3.3)</span> Telefonní číslo</label>
+        <input type="text" name="zakZasTel" pattern="^(\+?\d+){9,}$" required>
+      </div>
+      <div class="w50PerCent">
+        <label for="zakZasEmail"><span class="fs090em">3.4)</span> e-mail</label>
+        <input type="email" name="zakZasEmail" required>
+      </div>
+      <div class="w100PerCent">
+        <label for="zakZast2Jmeno"><span class="fs090em">3.5)</span> Jméno 2. zák. zástupce (pokud nelze uvést,
+          vyplňte údaje jiné blízké osoby, kterou bude možné v případě potřeby kontaktovat)</label>
+        <input type="text" name="zakZast2Jmeno" minlength="6" required>
+      </div>
+      <div class="w25PerCent">
+        <label for="zakZast2Vztah"><span class="fs090em">3.6)</span> Vztah k dítěti</label>
+        <input type="text" name="zakZast2Vztah" required minlength="3">
+      </div>
+      <div class="w25PerCent">
+        <label for="zakZast2Tel"><span class="fs090em">3.7)</span> Telefonní číslo</label>
+        <input type="text" name="zakZast2Tel" pattern="^(\+?\d+){9,}$" required>
+      </div>
+      <div class="w50PerCent">
+        <label for="zakZast2Email"><span class="fs090em">3.8)</span> e-mail</label>
+        <input type="email" name="zakZast2Email" required>
+      </div>
+      <div class="w50PerCent">
+        <label for="kontakt3Jmeno"><span class="fs090em">3.9)</span> Jméno další kontaktní osoby (nepovinné)</label>
+        <input type="text" name="kontakt3Jmeno">
+      </div>
+      <div class="w25PerCent">
+        <label for="kontakt3Vztah"><span class="fs090em">3.10)</span> Vztah k dítěti</label>
+        <input type="text" name="kontakt3Vztah">
+      </div>
+      <div class="w25PerCent">
+        <label for="kontakt3Tel"><span class="fs090em">3.11)</span> Telefonní číslo</label>
+        <input type="tel" name="kontakt3Tel">
+      </div>
+      <div class="w50PerCent">
+        <label for="kontakt3Email"><span class="fs090em">3.12)</span> e-mail</label>
+        <input type="email" name="kontakt3Email">
+      </div>
+    </fieldset>
+
+    <fieldset id="frmRegEyeSight">
+      <legend><span class="fs090em">4)</span> Část o zraku</legend>
+      <div class="w100PerCent">
+        <label for="jakDiteVidiRadios"><span class="fs090em">4.1)</span> Jak je na tom vaše dítě se zrakem?
+        </label>
+        <div id="jakDiteVidiRadios" class="verticalElements">
+          <label><input type="radio" name="jakDiteVidi" value="1" required>nosí brýle a vidí s nimi prakticky
+            jako zdravý
+            člověk</label>
+          <label><input type="radio" name="jakDiteVidi" value="2">silně slabozraké, přečte hodně zvětšený
+            černotisk</label>
+          <label><input type="radio" name="jakDiteVidi" value="3">je zcela nevidomé, nebo má zachovaný
+            světlocit</label>
+        </div>
+      </div>
+      <div class="w100PerCent">
+        <label for="zrakDetaily"><span class="fs090em">4.2)</span> Jak se zrakové postižení projevuje u Vašeho
+          dítěte funkčně? (např. šeroslepost, vidí zhruba na 2 metry, má omezené zorné pole, barvoslepost)</label>
+        <textarea name="zrakDetaily" required></textarea>
+      </div>
+      <div class="w33PerCent">
+        <label for="umiBrailleRadios"><span class="fs090em">4.3)</span> Umí dítě Braillovo písmo?</label>
+        <div id="umiBrailleRadios" class="verticalElements">
+          <label><input type="radio" name="umiBraille" value="ano" required>ano</label>
+          <label><input type="radio" name="umiBraille" value="trochu">omezeně</label>
+          <label><input type="radio" name="umiBraille" value="ne">ne</label>
+        </div>
+      </div>
+      <div class="w33PerCent">
+        <label for="umiSBilouHoliRadios"><span class="fs090em">4.4)</span> Je zvyklé chodit s bílou holí?</label>
+        <div id="umiSBilouHoliRadios" class="verticalElements">
+          <label><input type="radio" name="umiSBilouHoli" value="ano" required>ano</label>
+          <label><input type="radio" name="umiSBilouHoli" value="ne">ne</label>
+        </div>
+      </div>
+      <div class="w33PerCent">
+        <label for="budeMitBilouHulradios"><span class="fs090em">4.5)</span> Bude mít s sebou bílou hůl? (doporučeno)</label>
+        <div id="budeMitBilouHulradios" class="verticalElements">
+          <label><input type="radio" name="budeMitBilouHul" value="ano" required>ano</label>
+          <label><input type="radio" name="budeMitBilouHul" value="ne">ne</label>
+        </div>
+      </div>
+      <div class="w100PerCent">
+        <label for="omezeniSkrZrakVadu"><span class="fs090em">4.6)</span> Má nějaká pohybová nebo režimová
+          omezení v
+          souvislosti se zrakovou vadou? (pokud ano, uveďte také podrobnsti. Např.: Nesmí skákat kvůli glaukomu,riziku
+          odchlípení sítnice apod.)</label>
+        <textarea name="omezeniSkrZrakVadu" minlength="2" required></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset id="frmRegHealth">
+      <legend><span class="fs090em">5)</span> Zdravotnická část</legend>
+      <div class="w100PerCent">
+        <label for="uzivaneLeky"><span class="fs090em">5.1)</span> Užívá vaše dítě nějaké léky? (Pokud ano, uveďte
+          podrobnosti - název, dávkování - např. "Euthyrox, 1
+          tableta 100mg, ráno po jídle")
+        </label>
+        <textarea name="uzivaneLeky" minlength="2" required></textarea>
+      </div>
+      <div class="w100PerCent">
+        <label for="alergieCheckboxes"><span class="fs090em">5.2)</span> Prosím zaškrtněte, pokud trpí alergií na
+          něco
+          z uvedeného:</label>
+        <div id="alergieCheckboxes" class="verticalElements">
+          <label><input type="checkbox" name="alergie" value="pyl">pyl</label>
+          <label><input type="checkbox" name="alergie" value="penicilin">penicilin</label>
+          <label><input type="checkbox" name="alergie" value="ořechyArašídy">ořechy/arašídy</label>
+          <label><input type="checkbox" name="alergie" value="bodutíVčelouVosou">bodutí včelou/vosou</label>
+          <label><input type="checkbox" name="alergie" value="jód">jód (např. v dezinfekcích Betadine)</label>
+          <label><input type="checkbox" name="alergie" value="latex">latex (např. gumové rukavice)</label>
+        </div>
+      </div>
+      <div class="w100PerCent">
+        <label for="ostatniAlergieDetaily"><span class="fs090em">5.3)</span> Má ještě jiné alergie? (pokud ano, uveďte
+          také podrobnosti)</label>
+        <textarea name="ostatniAlergieDetaily" minlength="2" required></textarea>
+      </div>
+
+      <div class="w100PerCent">
+        <label for="zakazanePotraviny"><span class="fs090em">5.4)</span> Má Vaše dítě zakázané ze zdravotních důvodů
+          některé potraviny? (Např.: Bezlepková dieta)</label>
+        <textarea name="zakazanePotraviny" minlength="2" required></textarea>
+
+      </div>
+
+      <div class="w50PerCent">
+        <label for="nemociCheckboxes"><span class="fs090em">5.5)</span> Prosím zaškrtněte, pokud dítě trpí některým
+          z následujících onemocnění:</label>
+        <div id="nemociCheckboxes" class="verticalElements">
+          <label><input type="checkbox" name="nemoci" value="asthma">astma</label>
+          <label><input type="checkbox" name="nemoci" value="epilepsie">epilepsie</label>
+          <label><input type="checkbox" name="nemoci" value="diabetes">diabetes</label>
+          <label><input type="checkbox" name="nemoci" value="vysKrevniTlak">vysoký krevní tlak</label>
+          <label><input type="checkbox" name="nemoci" value="poruchyStitneZlazy">poruchy funkce štítné žlázy</label>
+        </div>
+      </div>
+
+      <div class="w50PerCent">
+        <label for="pomočováníRadios"><span class="fs090em">5.55)</span> Pomočuje se dítě v noci?</label>
+        <div id="pomočováníRadios" class="verticalElements">
+          <label><input type="radio" name="pomočování" value="yes" required>ano</label>
+          <label><input type="radio" name="pomočování" value="no">ne</label>
+          <label><input type="radio" name="pomočování" value="občas">občas</label>
+        </div>
+      </div>
+
+      <div class="w100PerCent">
+        <label for="epilepsieDetaily"><span class="fs090em">5.6)</span> Pokud mívá Vaše dítě epileptické záchvaty,
+          napište prosím, jak často je mívá, kdy jej mělo naposledy a zda má nařízená nějaká související režimová
+          opatření:</label>
+        <textarea name="epilepsieDetaily"></textarea>
+      </div>
+      <div>
+        <label for="ostatniNemoci"><span class="fs090em">5.7)</span> Má dítě jiná chronická onemocnění? (pokud ano,
+          uveďte také podrobnosti)</label>
+        <textarea name="ostatniNemoci" minlength="2" required></textarea>
+      </div>
+
+      <div>
+        <label for="jesteNecoBychomMeliVedet"><span class="fs090em">5.9)</span> Je ještě něco, co bychom měli o
+          vašem dítěti vědět? (Pokud ano, uveďte i podrobnosti - např.: Často omdlévá, má problémy s chůzí na dlouhé
+          vzdálenosti, atp.)
+        </label>
+        <textarea name="jesteNecoBychomMeliVedet" minlength="2" required></textarea>
+      </div>
+
+    </fieldset>
+
+    <fieldset id="frmRegGDPR" class="avoidPageBreakInside">
+      <legend><span class="fs090em">6)</span> GDPR</legend>
+      <div>
+        <label for="gdprSouhlasSeZverejnenimRadios"><span class="fs090em">7.1)</span> Souhlas s pořizováním
+          fotografií/videí</label>
+        <div id="gdprSouhlasSeZverejnenimRadios" class="verticalElements">
+          <label><input type="radio" name="gdprSouhlasSeZverejnenim" value="ANO" required>Souhlasím s tím, aby
+            fotografie nebo
+            videa, na
+            kterých je zachycen(a) můj syn/ má dcera/ můj svěřenec na akcích pořádaných Tyfloturistickým oddílem,
+            z.s., byly uveřejňovány na webových či facebookových stránkách tohoto spolku a byly případně použity pro
+            účely propagace činnosti spolku.</label>
+          <label><input type="radio" name="gdprSouhlasSeZverejnenim" value="NE" required>Nesouhlasím s tím, aby fotografie nebo videa, na kterých je zachycen(a) můj syn/ má dcera/ můj svěřenec na akcích pořádaných Tyfloturistickým oddílem, z.s., byly uveřejňovány na webových či facebookových stránkách tohoto spolku a byly případně použity pro účely propagace činnosti spolku.</label>
+        </div>
+      </div>
+      <div>
+        <label for="gdprSouhlasSOznacenim"><span class="fs090em">7.2)</span> Souhlas s označením fotek/videí</label>
+        <div id="gdprSouhlasSOznacenim" class="verticalElements">
+          <label><input type="radio" name="gdprMuzemOznacit" value="ANO" required>Souhlasím s tím, aby v popiscích fotografií nebo videí bylo uvedeno i jméno mého syna/svěřence/mé dcery.</label>
+          <label><input type="radio" name="gdprMuzemOznacit" value="NE" required>Nesouhlasím s tím, aby v popiscích fotografií nebo videí bylo uvedeno i jméno mého syna/svěřence/mé dcery.</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset id="frmRegCheckAndPrint">
+      <legend><span class="fs090em">7)</span> Odeslání přihlášky</legend>
+
+      <div id="declaration" class="verticalElements">
+        <label><input type="checkbox" required name="zavaznePrihlasuji" value="zavaznePrihlasuji">Tímto závazně přihlašuji své dítě na Podzimky 2019 s TTO</label>
+        <label><input type="checkbox" required name="udajePravdive" value="udajePravdive">Prohlašuji, že výše uvedné informace jsou pravdivé a zavazuji se hlavní vedoucí informovat o případných změnách.
+        </label>
+        <label><input type="checkbox" required name="diteJeZpusobile" value="diteJeZpusobile">Prohlašuji, že dítě je způsobilé k účasti na akci. (V případě pochybností konzultujte praktickým lékařem dítěte)</label>
+      </div>
+      <input type="submit" value="Odeslat přihlášku">
+
+    </fieldset>
+  </form>
+</main>
+<p id="turnOnJSWarning">Prosím ujistěte se, že máte ve svém prohlížeči aktivovaný Javascript</p>
+
+</body>
+
+
+</html>
