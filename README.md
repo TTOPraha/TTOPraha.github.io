@@ -1,4 +1,2 @@
 # TTOPraha.github.io
-XXX
-XZX
-XXX
+live-server --port=8081
