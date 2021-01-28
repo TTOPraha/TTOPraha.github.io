@@ -46,13 +46,6 @@ page.init = () => {
   document.querySelector('#clearLocalStorage').addEventListener('click', page.clearLocalStorage);
 };
 
-page.printTestVersion = () => {
-  page.saveForLater();
-  page.createTestingVersion();
-  page.resizeTextAreas();
-  page.sendApplication(true);
-};
-
 page.resizeTextAreas = () => {
   const textAreas = document.querySelectorAll('textarea');
   const l = textAreas.length;
@@ -75,6 +68,13 @@ page.sendApplication = (test=false) => {
     return;
   } 
   const age = page.getAge(page.dateOfCampStart, dateOfBirth);
+
+  if(page.testVersion) formData.isTestApplication = true
+
+  document.querySelector('#progressCircle').style.display = 'block'
+  document.querySelector('#applicationNotSent').style.display = 'none';
+  document.querySelector('#sendingApplication').style.display = 'block'
+  document.querySelector('#submitForm').style.display = 'none';
     
   document.querySelector('#diteDatumNarozeni').value = page.convertDate(dateOfBirth);
   document.querySelector('#diteVek').value = age;
@@ -87,16 +87,16 @@ page.sendApplication = (test=false) => {
 
   const formDataText = JSON.stringify(formData);
 
-
   let xhr = new XMLHttpRequest();
   xhr.open("POST", page.serverLocation + '/prihlaskaJindrichovice', true);
   xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
   xhr.onreadystatechange = () => {
+    document.querySelector('#progressCircle').style.display = 'none'
     if (xhr.readyState === 4) console.log(xhr.status);
     if (xhr.readyState === 4 && xhr.status === 201) {
-      alert('Přihláška byla v pořádku odeslána. V krátkédobě byste měli obdržet potvrzující e-mail.')
-      document.querySelector('#applicationNotSent').style.display = 'none';
-      document.querySelector('#submitForm').style.display = 'none';
+      document.querySelector('#sendingApplication').style.display = 'none'
+      document.querySelector('#applicationSentSuccessfully').style.display = 'block';   
+      setTimeout(() => alert('Přihláška byla v pořádku odeslána. V krátkédobě byste měli obdržet potvrzující e-mail.'), 300)
     }
     else if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
     if (xhr.readyState === 4 && test === true) document.location.reload();
@@ -183,10 +183,6 @@ page.createTestingVersion = () => {
 };
 
 page.clearForSiblingEntry = () => {
-  document.querySelector('#applicationNotSent').style.display = 'block';
-  document.querySelector('#applicationSentSuccessfully').style.display = 'none';
-  document.querySelector('#submitForm').style.display = 'block';
-
 
   // document.getElementById("myForm").reset()
 
@@ -230,11 +226,17 @@ page.clearForSiblingEntry = () => {
   
   page.clearLocalStorage();
   
+  document.querySelector('#applicationSentSuccessfully').style.display = 'none';
+  document.querySelector('#sendingApplication').style.display = 'none'
+  document.querySelector('#submitForm').style.display = 'block';
+  
   document.querySelector('#applicationNotSent').style.display = 'block';
   document.querySelector('#dateofBirthDiv').style.display = 'block';
   document.querySelector('#saveForLater').style.display = 'block';
   document.querySelector('#clearForm').style.display = 'block';  
   document.querySelector('#clearLocalStorage').style.display = 'block';
+
+  window.scrollTo(0, 0);
 
 };
 
