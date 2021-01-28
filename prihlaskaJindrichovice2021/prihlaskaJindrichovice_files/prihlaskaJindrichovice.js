@@ -16,6 +16,12 @@ page.dateOfCampStart = new Date(2021, 7, 12);
 page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
 
 window.onload = () => {
+  
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', page.serverLocation, true);
+  xhr.onreadystatechange = () => console.log(xhr.status);
+  xhr.send();
+
   page.init();
   if (page.testVersion) page.createTestingVersion();
 
@@ -29,11 +35,8 @@ window.onload = () => {
     // to wake up heroku
     let xhr = new XMLHttpRequest();
     xhr.open('GET', page.serverLocation, true);
-    xhr.onreadystatechange = () => {
-      console.log(xhr.status);
-    };
+    xhr.onreadystatechange = () => console.log(xhr.status);
     xhr.send();
-
   }, 60000);
 };
 
@@ -91,15 +94,20 @@ page.sendApplication = (test=false) => {
   xhr.open("POST", page.serverLocation + '/prihlaskaJindrichovice', true);
   xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
   xhr.onreadystatechange = () => {
-    document.querySelector('#progressCircle').style.display = 'none'
     if (xhr.readyState === 4) console.log(xhr.status);
     if (xhr.readyState === 4 && xhr.status === 201) {
+      document.querySelector('#progressCircle').style.display = 'none'
       document.querySelector('#sendingApplication').style.display = 'none'
       document.querySelector('#applicationSentSuccessfully').style.display = 'block';   
       setTimeout(() => alert('Přihláška byla v pořádku odeslána. V krátkédobě byste měli obdržet potvrzující e-mail.'), 300)
     }
-    else if (xhr.readyState === 4 && xhr.status !== 201) alert('Došlo k chybě. Prosíme kontaktujte podporu.');
-    if (xhr.readyState === 4 && test === true) document.location.reload();
+    else if (xhr.readyState === 4 && xhr.status !== 201) {
+      document.querySelector('#progressCircle').style.display = 'none'
+      document.querySelector('#applicationNotSent').style.display = 'block';
+      document.querySelector('#sendingApplication').style.display = 'none'
+      document.querySelector('#submitForm').style.display = 'block';
+      setTimeout(() => alert('Došlo k chybě. Prosím kontaktujte podporu.'), 300)
+    }
   };
   xhr.send(formDataText);
 };
