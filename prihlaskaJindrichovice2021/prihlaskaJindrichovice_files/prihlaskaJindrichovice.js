@@ -99,7 +99,7 @@ page.sendApplication = (test=false) => {
       document.querySelector('#progressCircle').style.display = 'none'
       document.querySelector('#sendingApplication').style.display = 'none'
       document.querySelector('#applicationSentSuccessfully').style.display = 'block';   
-      setTimeout(() => alert('Přihláška byla v pořádku odeslána. V krátkédobě byste měli obdržet potvrzující e-mail.'), 300)
+      setTimeout(() => alert('Přihláška byla v pořádku odeslána. V blízké době vás budeme kontaktovat.'), 300)
     }
     else if (xhr.readyState === 4 && xhr.status !== 201) {
       document.querySelector('#progressCircle').style.display = 'none'
