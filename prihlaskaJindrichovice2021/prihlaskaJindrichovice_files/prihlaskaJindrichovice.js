@@ -99,7 +99,13 @@ page.sendApplication = (test=false) => {
       document.querySelector('#progressCircle').style.display = 'none'
       document.querySelector('#sendingApplication').style.display = 'none'
       document.querySelector('#applicationSentSuccessfully').style.display = 'block';   
-      setTimeout(() => alert('Přihláška byla v pořádku odeslána. V blízké době vás budeme kontaktovat.'), 300)
+      setTimeout(() => alert(
+`
+Přihláška v pořádku odeslána.
+Na výše uvedenou adresu byl odeslán potvrzující email.\n
+Prosím zkontrolujte složku nevyžádané pošty, pokud jej neobdržíte během 5 minut, případně kontaktujte webmastera.
+`
+        ), 300)
     }
     else if (xhr.readyState === 4 && xhr.status !== 201) {
       document.querySelector('#progressCircle').style.display = 'none'
