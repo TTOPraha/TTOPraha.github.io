@@ -103,7 +103,7 @@ page.sendApplication = (test=false) => {
 `
 Přihláška v pořádku odeslána.
 Na výše uvedenou adresu byl odeslán potvrzující email.\n
-Prosím zkontrolujte složku nevyžádané pošty, pokud jej neobdržíte během 5 minut, případně kontaktujte webmastera.
+Prosím zkontrolujte složku nevyžádané pošty, pokud jej neobdržíte během 10 minut, případně kontaktujte webmastera.
 `
         ), 300)
     }
