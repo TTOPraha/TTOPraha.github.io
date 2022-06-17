@@ -1,8 +1,6 @@
 let page = {};
 page.dateOfCampStart = new Date(2022, 7, 12); // !!!
 page.applicationCode = 'Jindrichovice2022'
-page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
-
 
 page.applicationID = '';
 
@@ -352,7 +350,6 @@ page.getDateOfBirthFromRC = function (rc = '') {
     let thisYear = new Date().getFullYear() - 2000;
     if (year <= thisYear) year += 2000;
     else year += 1900;
-    if (year < page.minYearOfBirth) return false;
 
     let month = parseInt(rc.substring(2, 4), 10);
     if (month >= 50) month -= 50;
