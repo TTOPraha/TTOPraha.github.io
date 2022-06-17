@@ -1,4 +1,9 @@
 let page = {};
+page.dateOfCampStart = new Date(2022, 7, 12); // !!!
+page.applicationCode = 'Jindrichovice2022'
+page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
+
+
 page.applicationID = '';
 
 // na ostré verzi změnit na false
@@ -12,10 +17,7 @@ if (window.location.origin === 'http://127.0.0.1:8081' || window.location.origin
 else
   page.serverLocation = 'https://audiopexeso.herokuapp.com';
 
-page.dateOfCampStart = new Date(2021, 7, 12);
-page.minYearOfBirth = 1981; // Tomáš Hnízdil :)
 
-page.applicationCode = 'Jindrichovice2022'
 
 window.onload = () => {
   
@@ -360,7 +362,7 @@ page.getDateOfBirthFromRC = function (rc = '') {
     let day = parseInt(rc.substring(4, 6), 10);
     if (day < 1 || day > 31) return false;
 
-    return new Date(year, month, day);
+    return new Date(year, month, day + 1);
   } catch (e) {
     return false;
   }
